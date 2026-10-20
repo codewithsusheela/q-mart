@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Q-Mart | Shop Everything You Love</title>
+
+    <meta name="description"
+          content="Shop groceries, fashion, electronics, home essentials and more at Q-Mart.">
+
+    <meta name="theme-color" content="#123d2c">
+</head>
+
+<body>
+
+    <!-- Announcement bar -->
+    <div class="announcement-bar">
+        Welcome to Q-Mart! Your everyday shopping destination.
+    </div>
+
+    <!-- Main header -->
+    <header class="site-header">
+        <a class="logo" href="/" aria-label="Q-Mart homepage">
+            <span class="logo-icon">Q</span>
+            <span>Q-Mart</span>
+        </a>
+
+        <form class="search-form" action="/search" method="get" role="search">
+            <label class="visually-hidden" for="site-search">
+                Search products
+            </label>
+
+            <input
+                id="site-search"
+                type="search"
+                name="q"
+                placeholder="Search groceries, fashion, electronics..."
+            >
+
+            <button type="submit">Search</button>
+        </form>
+
+        <nav class="header-actions" aria-label="Account and shopping">
+            <a href="/account">My Account</a>
+            <a href="/wishlist">♡ Wishlist</a>
+            <a href="/cart">🛒 Cart <span id="cart-count">0</span></a>
+        </nav>
+    </header>
+
+    <!-- Main navigation -->
+    <nav class="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="#categories">All Categories</a>
+        <a href="#featured">Featured Products</a>
+        <a href="#deals">Today's Deals</a>
+        <a href="#footer">Contact</a>
+    </nav>
+
+    <main>
+
+        <!-- Hero banner -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <p class="eyebrow">WELCOME TO Q-MART</p>
+
+                <h1 id="hero-title">
+                    Everything you need.<br>
+                    All in one place.
+                </h1>
+
+                <p>
+                    Discover everyday essentials, the latest fashion,
+                    smart electronics and much more.
+                </p>
+
+                <a class="primary-button" href="#categories">
+                    Explore Categories →
+                </a>
+            </div>
+
+            <div class="hero-decoration" aria-hidden="true">
+                <span>🛍️</span>
+                <span>📦</span>
+                <span>🎁</span>
+            </div>
+        </section>
+
+        <!-- Benefits -->
+        <section class="benefits" aria-label="Shopping benefits">
+            <article>
+                <span>🚚</span>
+                <div>
+                    <h3>Convenient Delivery</h3>
+                    <p>Delivery options at checkout</p>
+                </div>
+            </article>
+
+            <article>
+                <span>🔒</span>
+                <div>
+                    <h3>Secure Shopping</h3>
+                    <p>Your security matters</p>
+                </div>
+            </article>
+
+            <article>
+                <span>💳</span>
+                <div>
+                    <h3>Easy Payments</h3>
+                    <p>Payment options at checkout</p>
+                </div>
+            </article>
+
+            <article>
+                <span>↩️</span>
+                <div>
+                    <h3>Clear Return Policies</h3>
+                    <p>Check product return terms</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- Categories -->
+        <section class="page-section" id="categories">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">EXPLORE Q-MART</p>
+                    <h2>Shop by Category</h2>
+                    <p>Find what you need, all in one place.</p>
+                </div>
+
+                <a href="#categories">Explore all 12 categories ↓</a>
+            </div>
+
+            <div class="category-grid">
+
+                <a class="category-card" href="/category/grocery-staples">
+                    <span>🌾</span>
+                    <h3>Grocery &amp; Staples</h3>
+                    <p>Rice, dals, spices and more</p>
+                </a>
+
+                <a class="category-card" href="/category/fruits-vegetables">
+                    <span>🍎</span>
+                    <h3>Fruits &amp; Vegetables</h3>
+                    <p>Fresh everyday produce</p>
+                </a>
+
+                <a class="category-card" href="/category/dairy-bakery-eggs">
+                    <span>🥛</span>
+                    <h3>Dairy, Bakery &amp; Eggs</h3>
+                    <p>Daily essentials and treats</p>
+                </a>
+
+                <a class="category-card" href="/category/snacks-beverages">
+                    <span>🍫</span>
+                    <h3>Snacks, Sweets &amp; Beverages</h3>
+                    <p>Snacks and refreshing drinks</p>
+                </a>
+
+                <a class="category-card" href="/category/beauty-personal-care">
+                    <span>🧴</span>
+                    <h3>Beauty &amp; Personal Care</h3>
+                    <p>Care for every day</p>
+                </a>
+
+                <a class="category-card" href="/category/fashion-men">
+                    <span>👔</span>
+                    <h3>Fashion — Men</h3>
+                    <p>Clothing and accessories</p>
+                </a>
+
+                <a class="category-card" href="/category/fashion-women">
+                    <span>👗</span>
+                    <h3>Fashion — Women</h3>
+                    <p>Styles for every occasion</p>
+                </a>
+
+                <a class="category-card" href="/category/electronics-gadgets">
+                    <span>📱</span>
+                    <h3>Electronics &amp; Gadgets</h3>
+                    <p>Technology and accessories</p>
+                </a>
+
+                <a class="category-card" href="/category/home-kitchen-dining">
+                    <span>🍽️</span>
+                    <h3>Home, Kitchen &amp; Dining</h3>
+                    <p>Make your home work for you</p>
+                </a>
+
+                <a class="category-card" href="/category/appliances-furniture">
+                    <span>🛋️</span>
+                    <h3>Home Appliances &amp; Furniture</h3>
+                    <p>Comfort for every room</p>
+                </a>
+
+                <a class="category-card" href="/category/baby-kids-toys">
+                    <span>🧸</span>
+                    <h3>Baby, Kids &amp; Toys</h3>
+                    <p>Little things, big smiles</p>
+                </a>
+
+                <a class="category-card" href="/category/sports-books-lifestyle">
+                    <span>⚽</span>
+                    <h3>Sports, Fitness, Books &amp; Lifestyle</h3>
+                    <p>Learn, move and explore</p>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Promotions -->
+        <section class="promo-banner" id="deals">
+            <div>
+                <p class="eyebrow">DISCOVER SOMETHING NEW</p>
+                <h2>Your next favourite thing is waiting.</h2>
+                <p>
+                    Explore products across groceries, lifestyle,
+                    electronics and more.
+                </p>
+            </div>
+
+            <a class="secondary-button" href="#featured">
+                Discover Products →
+            </a>
+        </section>
+
+        <!-- Featured products -->
+        <section class="page-section" id="featured">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">HANDPICKED FOR YOU</p>
+                    <h2>Featured Products</h2>
+                    <p>Our product catalogue will appear here.</p>
+                </div>
+            </div>
+
+            <div class="empty-products" id="product-list">
+                <span>🛍️</span>
+                <h3>Your shopping discovery starts here</h3>
+                <p>
+                    We will add product cards, images, prices,
+                    stock details and shopping buttons next.
+                </p>
+            </div>
+        </section>
+
+        <!-- Newsletter placeholder -->
+        <section class="newsletter">
+            <div>
+                <h2>Stay connected with Q-Mart</h2>
+                <p>Shopping updates and new arrivals, coming soon.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="footer">
+        <div class="footer-brand">
+            <a class="logo" href="/">
+                <span class="logo-icon">Q</span>
+                <span>Q-Mart</span>
+            </a>
+
+            <p>Your everyday shopping destination.</p>
+        </div>
+
+        <div>
+            <h3>Customer Service</h3>
+            <a href="/contact">Contact Us</a>
+            <a href="/shipping">Shipping Information</a>
+            <a href="/returns">Returns &amp; Refunds</a>
+        </div>
+
+        <div>
+            <h3>About Q-Mart</h3>
+            <a href="/about">About Us</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms &amp; Conditions</a>
+        </div>
+
+        <div class="copyright">
+            © 2026 Q-Mart. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
