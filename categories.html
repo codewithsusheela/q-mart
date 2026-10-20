@@ -1,0 +1,715 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore all Q-Mart shopping categories, from groceries and fashion to electronics and lifestyle.">
+    <title>All Categories | Q-Mart</title>
+
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <style>
+        :root {
+            --qm-green: #173d2b;
+            --qm-green-light: #eaf0e8;
+            --qm-gold: #b58b48;
+            --qm-text: #26352c;
+            --qm-muted: #69766d;
+            --qm-border: #e2e7df;
+            --qm-background: #f8f9f6;
+            --qm-white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--qm-text);
+            background: var(--qm-background);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .categories-header {
+            background: var(--qm-white);
+            border-bottom: 1px solid var(--qm-border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-inner {
+            width: min(1240px, 94%);
+            min-height: 76px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .qm-logo {
+            text-decoration: none;
+            font-size: 29px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--qm-green);
+        }
+
+        .qm-logo span {
+            color: var(--qm-gold);
+        }
+
+        .header-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .header-nav a:hover,
+        .breadcrumb a:hover {
+            color: var(--qm-gold);
+        }
+
+        .categories-hero {
+            background: linear-gradient(120deg, #173d2b, #315b42);
+            color: var(--qm-white);
+            padding: 58px 20px;
+        }
+
+        .hero-inner {
+            width: min(1240px, 100%);
+            margin: auto;
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: #e3c997;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .categories-hero h1 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(34px, 5vw, 52px);
+            font-weight: 500;
+            line-height: 1.15;
+        }
+
+        .categories-hero p {
+            max-width: 650px;
+            color: #e5ede6;
+            margin: 16px 0 0;
+        }
+
+        .categories-main {
+            width: min(1240px, 94%);
+            margin: 28px auto 60px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 26px;
+            color: var(--qm-muted);
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: var(--qm-green);
+            text-decoration: none;
+        }
+
+        .catalog-summary {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: end;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .catalog-summary h2 {
+            margin: 0;
+            color: var(--qm-green);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(25px, 3vw, 32px);
+        }
+
+        .catalog-summary p {
+            margin: 5px 0 0;
+            color: var(--qm-muted);
+            font-size: 14px;
+        }
+
+        .category-count {
+            padding: 9px 14px;
+            border: 1px solid #d7e1d5;
+            border-radius: 30px;
+            background: var(--qm-green-light);
+            color: var(--qm-green);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .category-card {
+            min-width: 0;
+            overflow: hidden;
+            background: var(--qm-white);
+            border: 1px solid var(--qm-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(27, 51, 34, 0.035);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            scroll-margin-top: 100px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(27, 51, 34, 0.09);
+        }
+
+        .category-heading {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 22px;
+            background: linear-gradient(120deg, #f0f4ec, #fafbf8);
+            border-bottom: 1px solid var(--qm-border);
+        }
+
+        .category-icon {
+            display: grid;
+            place-items: center;
+            flex: 0 0 58px;
+            width: 58px;
+            height: 58px;
+            border-radius: 15px;
+            background: var(--qm-white);
+            font-size: 31px;
+        }
+
+        .category-heading h2 {
+            margin: 0;
+            font-size: 19px;
+            line-height: 1.3;
+            color: var(--qm-green);
+        }
+
+        .category-heading p {
+            margin: 5px 0 0;
+            color: var(--qm-muted);
+            font-size: 12px;
+        }
+
+        .subcategory-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0 18px;
+            padding: 15px 22px 18px;
+            margin: 0;
+            list-style: none;
+        }
+
+        .subcategory-list li {
+            min-width: 0;
+            border-bottom: 1px solid #edf0eb;
+        }
+
+        .subcategory-list li:last-child,
+        .subcategory-list li:nth-last-child(2):nth-child(odd) {
+            border-bottom: 0;
+        }
+
+        .subcategory-list a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 7px;
+            min-height: 48px;
+            padding: 8px 0;
+            text-decoration: none;
+            color: #3d4b41;
+            font-size: 13px;
+        }
+
+        .subcategory-list a span {
+            overflow-wrap: anywhere;
+        }
+
+        .subcategory-list a strong {
+            color: var(--qm-gold);
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .subcategory-list a:hover {
+            color: var(--qm-green);
+            font-weight: 700;
+        }
+
+        .view-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 22px 22px;
+            color: var(--qm-green);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .view-category:hover {
+            color: var(--qm-gold);
+        }
+
+        .categories-footer {
+            padding: 32px 20px;
+            background: #112f21;
+            color: #e6ece6;
+        }
+
+        .footer-inner {
+            width: min(1240px, 100%);
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-inner p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .footer-inner a {
+            color: #e6ece6;
+            text-decoration: none;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        @media (max-width: 760px) {
+            .header-inner {
+                padding: 13px 0;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-nav {
+                gap: 15px;
+            }
+
+            .categories-hero {
+                padding: 42px 20px;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .header-nav {
+                gap: 12px;
+            }
+
+            .header-nav a {
+                font-size: 12px;
+            }
+
+            .category-heading {
+                padding: 17px;
+                gap: 12px;
+            }
+
+            .category-icon {
+                flex-basis: 48px;
+                width: 48px;
+                height: 48px;
+                font-size: 26px;
+            }
+
+            .category-heading h2 {
+                font-size: 17px;
+            }
+
+            .subcategory-list {
+                gap: 0 12px;
+                padding: 12px 17px 16px;
+            }
+
+            .subcategory-list a {
+                font-size: 12px;
+            }
+
+            .view-category {
+                margin-left: 17px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="categories-header">
+        <div class="header-inner">
+            <a class="qm-logo" href="index.html" aria-label="Q-Mart home">
+                Q<span>-</span>Mart
+            </a>
+
+            <nav class="header-nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="categories.html" aria-current="page">Categories</a>
+                <a href="cart.html">Cart</a>
+                <a href="product.html">Featured Product</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="categories-hero" aria-labelledby="page-title">
+        <div class="hero-inner">
+            <p class="eyebrow">Discover Q-Mart</p>
+            <h1 id="page-title">Explore Every Category</h1>
+            <p>
+                From everyday essentials to premium lifestyle finds,
+                discover your next favourite product across our collections.
+            </p>
+        </div>
+    </section>
+
+    <main class="categories-main">
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span aria-hidden="true"> / </span>
+            <span aria-current="page">All Categories</span>
+        </nav>
+
+        <section aria-labelledby="catalog-title">
+            <div class="catalog-summary">
+                <div>
+                    <h2 id="catalog-title">Shop by Department</h2>
+                    <p>Choose a department, then explore its subcategories.</p>
+                </div>
+                <span class="category-count">12 Departments · 96 Subcategories</span>
+            </div>
+
+            <div class="category-grid">
+
+                <!-- 1. Grocery & Staples -->
+                <article class="category-card" id="grocery-staples">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🌾</div>
+                        <div>
+                            <h2>1. Grocery &amp; Staples</h2>
+                            <p>Everyday pantry essentials</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=grocery-staples&subcategory=rice-grains"><span>Rice &amp; Grains</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=grocery-staples&subcategory=dals-pulses"><span>Dals &amp; Pulses</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=grocery-staples&subcategory=spices-masalas"><span>Spices &amp; Masalas</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=grocery-staples&subcategory=flour-atta"><span>Flour &amp; Atta</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=grocery-staples&subcategory=oils-ghee"><span>Oils &amp; Ghee</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=grocery-staples&subcategory=packed-food"><span>Packaged Food</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=grocery-staples&subcategory=sugar-sweeteners"><span>Sugar &amp; Sweeteners</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=grocery-staples&subcategory=dry-fruits-nuts"><span>Dry Fruits &amp; Nuts</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=grocery-staples">Explore Grocery &amp; Staples →</a>
+                </article>
+
+                <!-- 2. Fruits & Vegetables -->
+                <article class="category-card" id="fruits-vegetables">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🥦</div>
+                        <div>
+                            <h2>2. Fruits &amp; Vegetables</h2>
+                            <p>Fresh picks for every day</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=fruits-vegetables&subcategory=fresh-fruits"><span>Fresh Fruits</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fruits-vegetables&subcategory=fresh-vegetables"><span>Fresh Vegetables</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fruits-vegetables&subcategory=leafy-greens"><span>Leafy Greens</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fruits-vegetables&subcategory=exotic-produce"><span>Exotic Produce</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fruits-vegetables&subcategory=organic-produce"><span>Organic Produce</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fruits-vegetables&subcategory=herbs"><span>Fresh Herbs</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fruits-vegetables&subcategory=roots-tubers"><span>Roots &amp; Tubers</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fruits-vegetables&subcategory=fruit-combos"><span>Fruit Combos</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=fruits-vegetables">Explore Fruits &amp; Vegetables →</a>
+                </article>
+
+                <!-- 3. Dairy, Bakery & Eggs -->
+                <article class="category-card" id="dairy-bakery-eggs">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🥛</div>
+                        <div>
+                            <h2>3. Dairy, Bakery &amp; Eggs</h2>
+                            <p>Fresh and daily essentials</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=dairy-bakery-eggs&subcategory=milk"><span>Milk</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=dairy-bakery-eggs&subcategory=curd-yogurt"><span>Curd &amp; Yogurt</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=dairy-bakery-eggs&subcategory=butter-cheese"><span>Butter &amp; Cheese</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=dairy-bakery-eggs&subcategory=paneer-tofu"><span>Paneer &amp; Tofu</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=dairy-bakery-eggs&subcategory=bread-buns"><span>Bread &amp; Buns</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=dairy-bakery-eggs&subcategory=cakes-pastries"><span>Cakes &amp; Pastries</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=dairy-bakery-eggs&subcategory=eggs"><span>Eggs</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=dairy-bakery-eggs&subcategory=dairy-alternatives"><span>Dairy Alternatives</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=dairy-bakery-eggs">Explore Dairy &amp; Bakery →</a>
+                </article>
+
+                <!-- 4. Snacks, Sweets & Beverages -->
+                <article class="category-card" id="snacks-sweets-beverages">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🍪</div>
+                        <div>
+                            <h2>4. Snacks, Sweets &amp; Beverages</h2>
+                            <p>Treats, drinks and quick bites</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=snacks-sweets-beverages&subcategory=chips-namkeen"><span>Chips &amp; Namkeen</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=snacks-sweets-beverages&subcategory=biscuits-cookies"><span>Biscuits &amp; Cookies</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=snacks-sweets-beverages&subcategory=chocolates"><span>Chocolates</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=snacks-sweets-beverages&subcategory=indian-sweets"><span>Indian Sweets</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=snacks-sweets-beverages&subcategory=tea-coffee"><span>Tea &amp; Coffee</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=snacks-sweets-beverages&subcategory=soft-drinks-juices"><span>Soft Drinks &amp; Juices</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=snacks-sweets-beverages&subcategory=healthy-snacks"><span>Healthy Snacks</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=snacks-sweets-beverages&subcategory=dessert-mixes"><span>Dessert Mixes</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=snacks-sweets-beverages">Explore Snacks &amp; Beverages →</a>
+                </article>
+
+                <!-- 5. Beauty & Personal Care -->
+                <article class="category-card" id="beauty-personal-care">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">✨</div>
+                        <div>
+                            <h2>5. Beauty &amp; Personal Care</h2>
+                            <p>Care, beauty and grooming</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=beauty-personal-care&subcategory=skincare"><span>Skincare</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=beauty-personal-care&subcategory=makeup"><span>Makeup</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=beauty-personal-care&subcategory=haircare"><span>Haircare</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=beauty-personal-care&subcategory=bath-body"><span>Bath &amp; Body</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=beauty-personal-care&subcategory=fragrances"><span>Fragrances</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=beauty-personal-care&subcategory=oral-care"><span>Oral Care</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=beauty-personal-care&subcategory=mens-grooming"><span>Men's Grooming</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=beauty-personal-care&subcategory=wellness-hygiene"><span>Wellness &amp; Hygiene</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=beauty-personal-care">Explore Beauty &amp; Personal Care →</a>
+                </article>
+
+                <!-- 6. Fashion — Men -->
+                <article class="category-card" id="fashion-men">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">👔</div>
+                        <div>
+                            <h2>6. Fashion — Men</h2>
+                            <p>Everyday wear to occasion wear</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=fashion-men&subcategory=tshirts-shirts"><span>T-Shirts &amp; Shirts</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-men&subcategory=jeans-trousers"><span>Jeans &amp; Trousers</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-men&subcategory=ethnic-wear"><span>Ethnic Wear</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-men&subcategory=jackets-outerwear"><span>Jackets &amp; Outerwear</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-men&subcategory=innerwear-socks"><span>Innerwear &amp; Socks</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-men&subcategory=footwear"><span>Footwear</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-men&subcategory=watches-accessories"><span>Watches &amp; Accessories</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-men&subcategory=bags-wallets"><span>Bags &amp; Wallets</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=fashion-men">Explore Men's Fashion →</a>
+                </article>
+
+                <!-- 7. Fashion — Women -->
+                <article class="category-card" id="fashion-women">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">👗</div>
+                        <div>
+                            <h2>7. Fashion — Women</h2>
+                            <p>Style for every occasion</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=fashion-women&subcategory=dresses"><span>Dresses &amp; Gowns</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-women&subcategory=tops-tshirts"><span>Tops &amp; T-Shirts</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-women&subcategory=ethnic-wear"><span>Ethnic Wear</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-women&subcategory=jeans-trousers"><span>Jeans &amp; Trousers</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-women&subcategory=footwear"><span>Footwear</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-women&subcategory=handbags"><span>Handbags</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-women&subcategory=jewellery"><span>Jewellery</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=fashion-women&subcategory=lingerie-sleepwear"><span>Lingerie &amp; Sleepwear</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=fashion-women">Explore Women's Fashion →</a>
+                </article>
+
+                <!-- 8. Electronics & Gadgets -->
+                <article class="category-card" id="electronics-gadgets">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🎧</div>
+                        <div>
+                            <h2>8. Electronics &amp; Gadgets</h2>
+                            <p>Technology for work and play</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=electronics-gadgets&subcategory=smartphones"><span>Smartphones</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=electronics-gadgets&subcategory=laptops-computers"><span>Laptops &amp; Computers</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=electronics-gadgets&subcategory=headphones-audio"><span>Headphones &amp; Audio</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=electronics-gadgets&subcategory=smartwatches"><span>Smartwatches</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=electronics-gadgets&subcategory=mobile-accessories"><span>Mobile Accessories</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=electronics-gadgets&subcategory=gaming"><span>Gaming</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=electronics-gadgets&subcategory=cameras"><span>Cameras &amp; Photography</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=electronics-gadgets&subcategory=computer-accessories"><span>Computer Accessories</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=electronics-gadgets">Explore Electronics →</a>
+                </article>
+
+                <!-- 9. Home, Kitchen & Dining -->
+                <article class="category-card" id="home-kitchen-dining">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🏡</div>
+                        <div>
+                            <h2>9. Home, Kitchen &amp; Dining</h2>
+                            <p>Thoughtful finds for your home</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=home-kitchen-dining&subcategory=cookware"><span>Cookware</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-kitchen-dining&subcategory=kitchen-tools"><span>Kitchen Tools</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-kitchen-dining&subcategory=dinnerware"><span>Dinnerware</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-kitchen-dining&subcategory=storage-organization"><span>Storage &amp; Organization</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-kitchen-dining&subcategory=bedding"><span>Bedding &amp; Linen</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-kitchen-dining&subcategory=home-decor"><span>Home Decor</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-kitchen-dining&subcategory=lighting"><span>Lighting</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-kitchen-dining&subcategory=cleaning-laundry"><span>Cleaning &amp; Laundry</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=home-kitchen-dining">Explore Home &amp; Kitchen →</a>
+                </article>
+
+                <!-- 10. Home Appliances & Furniture -->
+                <article class="category-card" id="home-appliances-furniture">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🛋️</div>
+                        <div>
+                            <h2>10. Home Appliances &amp; Furniture</h2>
+                            <p>Comfort, convenience and utility</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=home-appliances-furniture&subcategory=refrigerators"><span>Refrigerators</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-appliances-furniture&subcategory=washing-machines"><span>Washing Machines</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-appliances-furniture&subcategory=air-conditioners"><span>Air Conditioners</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-appliances-furniture&subcategory=small-appliances"><span>Small Appliances</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-appliances-furniture&subcategory=sofas-seating"><span>Sofas &amp; Seating</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-appliances-furniture&subcategory=beds-mattresses"><span>Beds &amp; Mattresses</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-appliances-furniture&subcategory=tables-desks"><span>Tables &amp; Desks</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=home-appliances-furniture&subcategory=storage-furniture"><span>Storage Furniture</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=home-appliances-furniture">Explore Appliances &amp; Furniture →</a>
+                </article>
+
+                <!-- 11. Baby, Kids & Toys -->
+                <article class="category-card" id="baby-kids-toys">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🧸</div>
+                        <div>
+                            <h2>11. Baby, Kids &amp; Toys</h2>
+                            <p>Little essentials and big fun</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=baby-kids-toys&subcategory=baby-clothing"><span>Baby Clothing</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=baby-kids-toys&subcategory=diapers-wipes"><span>Diapers &amp; Wipes</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=baby-kids-toys&subcategory=baby-feeding"><span>Baby Feeding</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=baby-kids-toys&subcategory=strollers-furniture"><span>Strollers &amp; Furniture</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=baby-kids-toys&subcategory=educational-toys"><span>Educational Toys</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=baby-kids-toys&subcategory=action-dolls"><span>Action Figures &amp; Dolls</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=baby-kids-toys&subcategory=games-puzzles"><span>Games &amp; Puzzles</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=baby-kids-toys&subcategory=school-supplies"><span>School Supplies</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=baby-kids-toys">Explore Baby, Kids &amp; Toys →</a>
+                </article>
+
+                <!-- 12. Sports, Fitness, Books & Lifestyle -->
+                <article class="category-card" id="sports-fitness-books-lifestyle">
+                    <header class="category-heading">
+                        <div class="category-icon" aria-hidden="true">🏃</div>
+                        <div>
+                            <h2>12. Sports, Fitness, Books &amp; Lifestyle</h2>
+                            <p>Move, learn and explore</p>
+                        </div>
+                    </header>
+                    <ul class="subcategory-list">
+                        <li><a href="category.html?category=sports-fitness-books-lifestyle&subcategory=fitness-equipment"><span>Fitness Equipment</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=sports-fitness-books-lifestyle&subcategory=sports-gear"><span>Sports Gear</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=sports-fitness-books-lifestyle&subcategory=yoga-wellness"><span>Yoga &amp; Wellness</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=sports-fitness-books-lifestyle&subcategory=fiction-books"><span>Fiction Books</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=sports-fitness-books-lifestyle&subcategory=education-books"><span>Educational Books</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=sports-fitness-books-lifestyle&subcategory=stationery"><span>Stationery</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=sports-fitness-books-lifestyle&subcategory=travel-accessories"><span>Travel Accessories</span><strong>›</strong></a></li>
+                        <li><a href="category.html?category=sports-fitness-books-lifestyle&subcategory=automotive-accessories"><span>Automotive Accessories</span><strong>›</strong></a></li>
+                    </ul>
+                    <a class="view-category" href="category.html?category=sports-fitness-books-lifestyle">Explore Sports &amp; Lifestyle →</a>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="categories-footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 Q-Mart. Your everyday shopping destination.</p>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="index.html">Home</a>
+                <a href="categories.html">Categories</a>
+                <a href="cart.html">Shopping Cart</a>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+</html>
